@@ -9,8 +9,8 @@ const props = defineProps<{
 let tasks = ref<Task[]>([]);
 tasks.value = props.tasks_data;
 
-function removeTodo(todo: Task): void {
-  tasks.value = tasks.value.filter((t) => t !== todo);
+function removeTodo(index: number): void {
+  props.tasks_data.splice(index,1)
 }
 
 
@@ -29,7 +29,7 @@ function setEditable(todo:Task): void{
       </tr>
     </thead>
     <tbody>
-      <tr v-for="task in tasks" :key="task.id">
+      <tr v-for="(task,index) in tasks" :key="task.id">
         <td>
           <input
             class="form-check-input mx-2"
@@ -41,7 +41,7 @@ function setEditable(todo:Task): void{
         <td>{{ task.statut == false ? "En cours" : "Terminé" }}</td>
         <td>
           <button class="btn btn-primary"  v-if="task.statut==false" @click="setEditable(task)">{{task.editable==false?"Update":"Confirme"}}</button>
-          <button class="btn btn-danger" @click="removeTodo(task)">
+          <button class="btn btn-danger mx-2" @click="removeTodo(index)">
             Delete
           </button>
         </td>
