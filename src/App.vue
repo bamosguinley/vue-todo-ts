@@ -2,21 +2,14 @@
 import { ref } from "vue";
 
 import TodoComponent from "@/components/TodoComponent.vue";
-
+import type { Task } from "@types";
 import TodoFormComponent from "@/components/TodoFormComponent.vue";
-
-interface Task {
-  id: number;
-  text: string;
-  statut: string;
-}
 
 let tasks = ref<Task[]>([]);
 
-
 let id = 0;
-let getTask = (t: string):void => {
-  tasks.value.push({ id: id++, text: t, statut: "en attente" });
+let getTask = (value: string) => {
+  tasks.value.push({ id: id++, text: value, statut: false ,editable:false});
 };
 
 
@@ -27,7 +20,7 @@ let getTask = (t: string):void => {
   <main>
     <TodoFormComponent @send_text="getTask" />
     <TodoComponent :tasks_data="tasks"/>
-    {{ tasks }}
+    <!-- {{ tasks }} -->
   </main>
 </template>
 

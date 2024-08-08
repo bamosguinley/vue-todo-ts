@@ -2,7 +2,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const emit= defineEmits(["send_text"]);
+//gestion des emits
+const emit = defineEmits<{ send_text: [value:string] }>();
+
 const task_text = ref("");
 
 const send = (): void => {
